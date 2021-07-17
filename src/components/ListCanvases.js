@@ -33,15 +33,18 @@ const ListCanvases = () => {
             New Canvas
           </button>
         ) : (
-          <div>
+          <form>
             <input
               type="text"
               class="px-2 py-1 rounded border ml-2"
+              placeholder="Name of Canvas"
+              required
               value={canvas}
               onChange={(e) => setCanvas(e.target.value)}
             ></input>
             <button
               class="bg-green-500 text-white px-2 py-1 rounded ml-2"
+              type="submit"
               onClick={() => {
                 if (canvas !== "") {
                   history.push("/canvas/" + canvas);
@@ -58,7 +61,7 @@ const ListCanvases = () => {
             >
               Exit
             </button>
-          </div>
+          </form>
         )}
       </div>
       <div class="mt-5">{renderCanvases()}</div>
