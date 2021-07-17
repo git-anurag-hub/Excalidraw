@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import history from "../history";
 
 const ListCanvases = () => {
+  // fetch the canvas list from the local storage
   const [canvases, setCanvases] = useState(
     JSON.parse(window.localStorage.getItem("canvases") || "[]")
   );
   const [toggle, setToggle] = useState(false);
   const [canvas, setCanvas] = useState("");
 
+  // the list of canvases
   const renderCanvases = () => {
     return canvases.map((canvas) => {
       return (
@@ -33,6 +35,7 @@ const ListCanvases = () => {
             New Canvas
           </button>
         ) : (
+          // forming new canvas
           <form>
             <input
               type="text"
