@@ -1,7 +1,7 @@
 module.exports = (req, res) => {
   try {
     var { name, canvas } = req.body;
-    var canvases = localStorage.getItem("canvases");
+    var canvases = window.localStorage.getItem("canvases");
     canvases = JSON.parse(canvases);
     var storedCanvas = canvases.find((canvas) => {
       return canvas.name === name;
@@ -11,7 +11,7 @@ module.exports = (req, res) => {
     } else {
       canvases.push({ name, canvas });
     }
-    localStorage.setItem("canvases", JSON.stringify(canvases));
+    window.localStorage.setItem("canvases", JSON.stringify(canvases));
     res.send(canvases);
   } catch (e) {
     console.log(e);
