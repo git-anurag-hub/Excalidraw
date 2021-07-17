@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import Excalidraw, { exportToBlob } from "@excalidraw/excalidraw";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const Canvas = ({ name }) => {
+const Canvas = (props) => {
   const excalidrawRef = useRef(null);
   const [viewModeEnabled, setViewModeEnabled] = useState(false);
   const [zenModeEnabled, setZenModeEnabled] = useState(false);
   const [gridModeEnabled, setGridModeEnabled] = useState(false);
   const [theme, setTheme] = useState("light");
   const [blobUrl, setBlobUrl] = useState(null);
+  const name = props.match.params.name;
 
   const handleChange = async (elements, state) => {
     var canvas = { elements, appState: state };
@@ -43,6 +45,9 @@ const Canvas = ({ name }) => {
   return (
     <div>
       <div class="m-10 flex justify-center">
+        <Link to="/" className={`border rounded py-1 px-3 text-white m-2 bg-green-500`}>
+          Back to home
+        </Link>
         <button
           className={`border rounded py-1 px-3 text-white m-2 ${
             viewModeEnabled ? "bg-green-500" : "bg-gray-300"
