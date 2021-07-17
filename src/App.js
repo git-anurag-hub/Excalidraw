@@ -7,7 +7,7 @@ export default class App extends Component {
     return (
       <div>
         <Header></Header>
-        <Canvas></Canvas>
+        <Canvas name="test1"></Canvas>
       </div>
     );
   }
