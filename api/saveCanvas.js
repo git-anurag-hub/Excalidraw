@@ -1,3 +1,5 @@
+var fs = require("fs");
+
 module.exports = (req, res) => {
   try {
     var { name, canvas } = req.body;
