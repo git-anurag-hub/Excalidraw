@@ -14,6 +14,7 @@ module.exports = (req, res) => {
     localStorage.setItem("canvases", JSON.stringify(canvases));
     res.send(canvases);
   } catch (e) {
+    console.log(e);
     res.status(500).send(e);
   }
 };
