@@ -67,7 +67,7 @@ export default class Canvass extends Component {
     // download the blob in form of PNG
     var a = document.createElement("a");
     a.href = window.URL.createObjectURL(blob);
-    a.download = "Image.png";
+    a.download = `${this.props.match.params.name + ".png"}`;
     a.click();
   };
 
