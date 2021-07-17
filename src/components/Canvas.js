@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Excalidraw from "@excalidraw/excalidraw";
+import axios from "axios";
 
 const Canvas = () => {
   const excalidrawRef = useRef(null);
@@ -8,9 +9,21 @@ const Canvas = () => {
   const [gridModeEnabled, setGridModeEnabled] = useState(false);
   const [theme, setTheme] = useState("light");
 
+  const test = async () => {
+    let res = await axios.get("/api/main");
+    console.log(res);
+  };
+
   return (
     <div>
       <div class="m-10 flex justify-center">
+        <button
+          onClick={() => {
+            test();
+          }}
+        >
+          Test
+        </button>
         <button
           className={`border rounded py-1 px-3 text-white m-2 ${
             viewModeEnabled ? "bg-green-500" : "bg-gray-300"
