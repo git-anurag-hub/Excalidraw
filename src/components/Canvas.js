@@ -10,11 +10,15 @@ const Canvas = () => {
   const [theme, setTheme] = useState("light");
 
   const handleChange = async (elements, state) => {
-    let res = await axios.post("/api/saveCanvas", {
-      name: "canvas1",
-      canvas: { elements, appState: state },
-    });
-    console.log(res);
+    try {
+      let res = await axios.post("/api/saveCanvas", {
+        name: "canvas1",
+        canvas: { elements, appState: state },
+      });
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
