@@ -17,6 +17,7 @@ export default class Canvass extends Component {
   };
 
   componentDidMount = async () => {
+    // fetching initial data for canvas
     var canvases = window.localStorage.getItem("canvases");
     if (!canvases) {
       canvases = "[]";
@@ -30,17 +31,24 @@ export default class Canvass extends Component {
     });
   };
 
+  // updating the localstorage for the canvas
+  // used handle change for updaing rahter than timer change because what if the user is idling for a while then it will be updated in every 10 sec
+  // rather than that it will be updated only when the user is actively working on the canvas
+  // we can also improve the performance on handleChange by using the other functions in exciledraw library
   handleChange = async (elements, state) => {
     var canvas = { elements, appState: state };
+    // fetcing from localstorage
     var canvases = window.localStorage.getItem("canvases");
     if (!canvases) {
       canvases = "[]";
     }
     const name = this.props.match.params.name;
+    // converting to json
     canvases = JSON.parse(canvases);
     var storedCanvas = canvases.find((canvas) => {
       return canvas.name === name;
     });
+    // updating the localstorage
     if (storedCanvas) {
       storedCanvas.canvas = canvas;
     } else {
@@ -49,11 +57,14 @@ export default class Canvass extends Component {
     window.localStorage.setItem("canvases", JSON.stringify(canvases));
   };
 
+  // download the canvas
   handleSave = async () => {
+    // convert to blob
     const blob = await exportToBlob({
       elements: this.excalidrawRef.current.getSceneElements(),
       mimeType: "image/png",
     });
+    // download the blob in form of PNG
     var a = document.createElement("a");
     a.href = window.URL.createObjectURL(blob);
     a.download = "Image.png";
