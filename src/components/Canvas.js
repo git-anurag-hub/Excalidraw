@@ -9,21 +9,17 @@ const Canvas = () => {
   const [gridModeEnabled, setGridModeEnabled] = useState(false);
   const [theme, setTheme] = useState("light");
 
-  const test = async () => {
-    let res = await axios.get("/api/main");
+  const handleChange = async (elements, state) => {
+    let res = await axios.post("/api/saveCanvas", {
+      name: "canvas1",
+      canvas: { elements, appState: state },
+    });
     console.log(res);
   };
 
   return (
     <div>
       <div class="m-10 flex justify-center">
-        <button
-          onClick={() => {
-            test();
-          }}
-        >
-          Test
-        </button>
         <button
           className={`border rounded py-1 px-3 text-white m-2 ${
             viewModeEnabled ? "bg-green-500" : "bg-gray-300"
@@ -75,7 +71,7 @@ const Canvas = () => {
       <div class="border-gray-900 border rounded-lg m-10" style={{ height: "800px" }}>
         <Excalidraw
           ref={excalidrawRef}
-          onChange={(elements, state) => console.log("Elements :", elements, "State : ", state)}
+          onChange={(elements, state) => handleChange(elements, state)}
           onCollabButtonClick={() => window.alert("Not Implemented!")}
           viewModeEnabled={viewModeEnabled}
           zenModeEnabled={zenModeEnabled}
